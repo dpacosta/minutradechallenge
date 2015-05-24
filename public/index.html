@@ -1,0 +1,77 @@
+	<!DOCTYPE>
+	<html ng-app="myApp">
+	<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+		<title>Client List</title>
+	</head>
+	<body>
+		<div class="container" ng-controller="AppCtrl">
+			<h1>Client List</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>CPF</th>
+						<th>E-mail</th>
+						<th>Address</th>
+						<th>Phone</th>
+						<th>Marital Status</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<input class="form-control" ng-model="client.name">
+						</td>
+						<td>
+							<input class="form-control" ng-model="client.cpf">
+						</td>
+						<td>
+							<input class="form-control" ng-model="client.email">
+						</td>
+						<td>
+							<input class="form-control" ng-model="client.address">
+						</td>
+						<td>
+							<input class="form-control" ng-model="client.phone">
+						</td>
+						<td>
+							<input class="form-control" ng-model="client.maritalstatus">
+						</td>
+						<td>
+							<button class="btn btn-primary" ng-click="addClient()">Add Client</button>
+						</td>
+						<td>
+							<button class="btn btn-nfo" ng-click="update()">Update</button>&nbsp;&nbsp;
+						</td>
+						<td>
+							<button class="btn btn-info" ng-click="deselect()">Clear</button>
+						</td>
+					</tr>
+					<tr ng-repeat="client in clientlist">
+						<td>{{client.name}}</td>
+						<td>{{client.cpf}}</td>
+						<td>{{client.email}}</td>
+						<td>{{client.address}}</td>
+						<td>{{client.phone}}</td>
+						<td>{{client.maritalstatus}}</td>
+						<td>
+							<button class="btn btn-danger" ng-click="remove(client._id)">Remove</button>
+						</td>
+						<td>
+							<button class="btn btn-warning" ng-click="edit(client._id)">Edit</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<script src="controllers/controller.js"></script>
+	</body>
+	</html>
