@@ -39,6 +39,7 @@
   										<span ng-show="tableForm.cpf.$error.required">Required</span>
   										<span ng-show="!tableForm.cpf.$error.required">Invalid CPF</span>
   									</span>
+  									<span style="color:red" ng-show="duplicatedClient && tableForm.$submitted">Already exists</span>
 								</td>
 								<td>
 									<input type="email" class="form-control" name="email" ng-model="client.email" required>
@@ -71,13 +72,13 @@
   									</span>
 								</td>
 								<td>
-									<button class="btn btn-primary" ng-click="add(tableForm.$valid);">Add Client</button>
+									<button class="btn btn-primary" ng-click="add(tableForm.$valid);">Add</button>
 								</td>
 								<td>
 									<button class="btn btn-nfo" ng-click="update(tableForm.$valid);">Update</button>&nbsp;&nbsp;
 								</td>
 								<td>
-									<button class="btn btn-info" ng-click="deselect();tableForm.$submitted=false;">Clear</button>
+									<button class="btn btn-info" ng-click="clear();">Clear</button>
 								</td>
 							</tr>
 							<tr ng-repeat="client in clientlist">

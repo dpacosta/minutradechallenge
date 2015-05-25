@@ -56,4 +56,11 @@
 			});
 	});
 
+	app.get('/clientlist/findbycpf/:cpf', function(req,res){
+		var cpf = req.params.cpf;
+		db.clientlist.findOne({cpf : cpf}, function(err,doc){
+			res.json(doc);
+		})
+	});
+
 	app.listen(3000);
