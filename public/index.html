@@ -1,77 +1,108 @@
-	<!DOCTYPE>
-	<html ng-app="myApp">
-	<head>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+			<!DOCTYPE>
+			<html ng-app="myApp">
+			<head>
+			<!-- Latest compiled and minified CSS -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+			<!-- Optional theme -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
-		<title>Client List</title>
-	</head>
-	<body>
-		<div class="container" ng-controller="AppCtrl">
-			<h1>Client List</h1>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>CPF</th>
-						<th>E-mail</th>
-						<th>Address</th>
-						<th>Phone</th>
-						<th>Marital Status</th>
-						<th>&nbsp;</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<input class="form-control" ng-model="client.name">
-						</td>
-						<td>
-							<input class="form-control" ng-model="client.cpf">
-						</td>
-						<td>
-							<input class="form-control" ng-model="client.email">
-						</td>
-						<td>
-							<input class="form-control" ng-model="client.address">
-						</td>
-						<td>
-							<input class="form-control" ng-model="client.phone">
-						</td>
-						<td>
-							<input class="form-control" ng-model="client.maritalstatus">
-						</td>
-						<td>
-							<button class="btn btn-primary" ng-click="addClient()">Add Client</button>
-						</td>
-						<td>
-							<button class="btn btn-nfo" ng-click="update()">Update</button>&nbsp;&nbsp;
-						</td>
-						<td>
-							<button class="btn btn-info" ng-click="deselect()">Clear</button>
-						</td>
-					</tr>
-					<tr ng-repeat="client in clientlist">
-						<td>{{client.name}}</td>
-						<td>{{client.cpf}}</td>
-						<td>{{client.email}}</td>
-						<td>{{client.address}}</td>
-						<td>{{client.phone}}</td>
-						<td>{{client.maritalstatus}}</td>
-						<td>
-							<button class="btn btn-danger" ng-click="remove(client._id)">Remove</button>
-						</td>
-						<td>
-							<button class="btn btn-warning" ng-click="edit(client._id)">Edit</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-	<script src="controllers/controller.js"></script>
-	</body>
-	</html>
+				<title>Client List</title>
+			</head>
+			<body>
+				<div class="container" ng-controller="AppCtrl">
+					<h1>Client List</h1>
+					<form name="tableForm" ng-submit="addOrUpdateClient(tableForm.$valid)">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>CPF</th>
+								<th>E-mail</th>
+								<th>Address</th>
+								<th>Phone</th>
+								<th>Marital Status</th>
+								<th>&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<input class="form-control" name="name" ng-model="client.name" required>
+									<span style="color:red" ng-show="tableForm.name.$invalid && tableForm.$submitted">
+  										<span ng-show="tableForm.name.$error.required">Required</span>
+  									</span>
+								</td>
+								<td>
+									<input class="form-control" name="cpf" ng-model="client.cpf" ng-cpf ui-mask="999.999.999-99" required/>
+									<span style="color:red" ng-show="tableForm.cpf.$invalid && tableForm.$submitted">
+  										<span ng-show="tableForm.cpf.$error.required">Required</span>
+  										<span ng-show="!tableForm.cpf.$error.required">Invalid CPF</span>
+  									</span>
+								</td>
+								<td>
+									<input type="email" class="form-control" name="email" ng-model="client.email" required>
+									<span style="color:red" ng-show="tableForm.email.$invalid && tableForm.$submitted">
+  										<span ng-show="tableForm.email.$error.required">Required</span>
+  									</span>
+								</td>
+								<td>
+									<input class="form-control" name="address" ng-model="client.address" required>
+									<span style="color:red" ng-show="tableForm.address.$invalid && tableForm.$submitted">
+  										<span ng-show="tableForm.address.$error.required">Required</span>
+  									</span>
+								</td>
+								<td>
+									<input type="number" class="form-control" name="phone" ng-model="client.phone" min="0" required>
+									<span style="color:red" ng-show="tableForm.phone.$invalid && tableForm.$submitted">
+  										<span ng-show="tableForm.phone.$error.required">Required</span>
+  									</span>
+								</td>
+								<td>
+									<select class="form-control" name="maritalstatus" ng-model="client.maritalstatus" required>
+									  <option value="Married">Married</option>
+									  <option value="Widowed">Widowed</option>
+									  <option value="Separated">Separated</option>
+									  <option value="Divorced">Divorced</option>
+									  <option value="Single">Single</option>
+									</select>
+									<span style="color:red" ng-show="tableForm.maritalstatus.$invalid && tableForm.$submitted">
+  										<span ng-show="tableForm.maritalstatus.$error.required">Required</span>
+  									</span>
+								</td>
+								<td>
+									<button class="btn btn-primary" ng-click="add(tableForm.$valid);">Add Client</button>
+								</td>
+								<td>
+									<button class="btn btn-nfo" ng-click="update(tableForm.$valid);">Update</button>&nbsp;&nbsp;
+								</td>
+								<td>
+									<button class="btn btn-info" ng-click="deselect();tableForm.$submitted=false;">Clear</button>
+								</td>
+							</tr>
+							<tr ng-repeat="client in clientlist">
+								<td>{{client.name}}</td>
+								<td>{{client.cpf}}</td>
+								<td>{{client.email}}</td>
+								<td>{{client.address}}</td>
+								<td>{{client.phone}}</td>
+								<td>{{client.maritalstatus}}</td>
+								<td>
+									<button class="btn btn-danger" ng-click="remove(client._id)">Remove</button>
+								</td>
+								<td>
+									<button class="btn btn-warning" ng-click="edit(client._id)">Edit</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					</form>
+				</div>
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-ui-utils/ui-utils.min.js"></script>
+		<script src="bower_components/cpf_cnpj/build/cpf.js"></script>
+		<script src="bower_components/cpf_cnpj/build/cnpj.js"></script>
+		<script src="bower_components/ng-cpf-cnpj/lib/ngCpfCnpj.js"></script>
+		<script src="controllers/controller.js"></script>
+		</body>
+		</html>

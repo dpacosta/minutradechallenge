@@ -1,4 +1,4 @@
-	var myApp = angular.module('myApp',[]);
+	var myApp = angular.module('myApp',['ui.utils','ngCpfCnpj']);
 
 	myApp.controller('AppCtrl',['$scope','$http',function($scope, $http){
 
@@ -6,16 +6,20 @@
 			$http.get('/clientlist').success(function(response){
 			$scope.clientlist = response;
 			$scope.client = "";
+			$scope.tableForm.$submitted=false;
 		});
 		};
 
 		refresh();
 
-		$scope.addClient = function() {
-			console.log($scope.client);
-			$http.post('/clientlist', $scope.client).success(function(response){
-				refresh();
-			});
+		$scope.add = function(validForm) {
+			if(validForm){
+				$http.post('/clientlist', $scope.client).success(function(response){
+					refresh();
+				});
+			}else{
+				$scope.tableForm.$submitted=true;
+			}
 
 		};
 
@@ -31,14 +35,19 @@
 			});
 		};
 
-		$scope.update = function() {
-			$http.put('/clientlist/' + $scope.client._id, $scope.client).success(function(response){
-				refresh();
-			});
+		$scope.update = function(validForm) {
+			if(validForm){
+				$http.put('/clientlist/' + $scope.client._id, $scope.client).success(function(response){
+					refresh();
+				});
+			}else{
+				$scope.tableForm.$submitted=true;
+			}
 		};
 
 		$scope.deselect = function() {
 			$scope.client = "";
+			$scope.tableForm.$submitted=false;
 		};
 
 	}]);

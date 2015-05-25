@@ -38,7 +38,7 @@
 		var id = req.params.id;
 		db.clientlist.findAndModify({
 			query: {
-				id: mongojs.ObjectId(id)
+				_id: mongojs.ObjectId(id)
 			},
 			update: {
 				$set: {
