@@ -46,7 +46,7 @@
 					cpf: req.body.cpf,
 					email: req.body.email,
 					address: req.body.address,
-					phone: req.body.phone,
+					phones: req.body.phones,
 					maritalstatus:
 					req.body.maritalstatus}
 				},

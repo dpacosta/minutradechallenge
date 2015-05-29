@@ -7,12 +7,15 @@
 			<!-- Optional theme -->
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
-				<title>Client List</title>
+			<link rel="stylesheet" href="bower_components/angular-dialog-service/dist/dialogs.min.css">
+
+				<title>Clients Registration</title>
 			</head>
 			<body>
 				<div class="container" ng-controller="AppCtrl">
-					<h1>Client List</h1>
-					<form name="tableForm" ng-submit="addOrUpdateClient(tableForm.$valid)">
+					<h1>Clients Registration</h1>
+					<h5>*All fields are mandatory</h5>
+					<form name="tableForm">
 					<table class="table">
 						<thead>
 							<tr>
@@ -20,7 +23,7 @@
 								<th>CPF</th>
 								<th>E-mail</th>
 								<th>Address</th>
-								<th>Phone</th>
+								<th>Phones</th>
 								<th>Marital Status</th>
 								<th>&nbsp;</th>
 							</tr>
@@ -54,9 +57,9 @@
   									</span>
 								</td>
 								<td>
-									<input type="number" class="form-control" name="phone" ng-model="client.phone" min="0" required>
-									<span style="color:red" ng-show="tableForm.phone.$invalid && tableForm.$submitted">
-  										<span ng-show="tableForm.phone.$error.required">Required</span>
+									<button class="btn btn-warning" ng-click="openModal()">Add/Remove</button>
+									<span style="color:red" ng-show="client.phones.length == 0 && tableForm.$submitted">
+										Required
   									</span>
 								</td>
 								<td>
@@ -72,7 +75,7 @@
   									</span>
 								</td>
 								<td>
-									<button class="btn btn-primary" ng-click="add(tableForm.$valid);">Add</button>
+									<button class="btn btn-primary" ng-click="add(tableForm.$valid);">Create</button>
 								</td>
 								<td>
 									<button class="btn btn-nfo" ng-click="update(tableForm.$valid);">Update</button>&nbsp;&nbsp;
@@ -86,10 +89,14 @@
 								<td>{{client.cpf}}</td>
 								<td>{{client.email}}</td>
 								<td>{{client.address}}</td>
-								<td>{{client.phone}}</td>
+								<td>
+									<div ng-repeat="phone in client.phones">
+  										{{phone.number}}
+									</div>
+								</td>
 								<td>{{client.maritalstatus}}</td>
 								<td>
-									<button class="btn btn-danger" ng-click="remove(client._id)">Remove</button>
+									<button class="btn btn-danger" ng-click="remove(client._id)">Delete</button>
 								</td>
 								<td>
 									<button class="btn btn-warning" ng-click="edit(client._id)">Edit</button>
@@ -100,10 +107,12 @@
 					</form>
 				</div>
 		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 		<script src="bower_components/angular-ui-utils/ui-utils.min.js"></script>
 		<script src="bower_components/cpf_cnpj/build/cpf.js"></script>
 		<script src="bower_components/cpf_cnpj/build/cnpj.js"></script>
 		<script src="bower_components/ng-cpf-cnpj/lib/ngCpfCnpj.js"></script>
+		<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 		<script src="controllers/controller.js"></script>
 		</body>
 		</html>
