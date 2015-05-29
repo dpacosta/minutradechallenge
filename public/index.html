@@ -86,7 +86,7 @@
 							</tr>
 							<tr ng-repeat="client in clientlist | filter:client.cpf">
 								<td>{{client.name}}</td>
-								<td>{{client.cpf}}</td>
+								<td>{{formatCpf(client.cpf)}}</td>
 								<td>{{client.email}}</td>
 								<td>{{client.address}}</td>
 								<td>

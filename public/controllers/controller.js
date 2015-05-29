@@ -85,6 +85,14 @@
 		    });
 
 	  };
+	  
+	  $scope.formatCpf =function(cpf){
+	  	var first = cpf.substring(0, 3);
+	  	var second = cpf.substring(3, 6);
+	  	var third = cpf.substring(6, 9);
+	  	var fourth = cpf.substring(9, 11);
+	  	return first + "." + second + "." + third + "-" + fourth;
+	  }
 
 	});
 
