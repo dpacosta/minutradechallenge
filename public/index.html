@@ -84,7 +84,7 @@
 									<button class="btn btn-info" ng-click="clear();">Clear</button>
 								</td>
 							</tr>
-							<tr ng-repeat="client in clientlist">
+							<tr ng-repeat="client in clientlist | filter:client.cpf">
 								<td>{{client.name}}</td>
 								<td>{{client.cpf}}</td>
 								<td>{{client.email}}</td>
