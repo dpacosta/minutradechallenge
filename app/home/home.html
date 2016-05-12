@@ -1,0 +1,94 @@
+<div class="container">
+  <h1>Client Registration</h1>
+  <h5>*All fields are mandatory</h5>
+  <form name="tableForm">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>CPF</th>
+        <th>E-mail</th>
+        <th>Address</th>
+        <th>Phones</th>
+        <th>Marital Status</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input class="form-control" name="name" ng-model="vm.client.name" required>
+          <span style="color:red" ng-show="tableForm.name.$invalid && tableForm.$submitted">
+              <span ng-show="tableForm.name.$error.required">Required</span>
+            </span>
+        </td>
+        <td>
+          <input class="form-control" name="cpf" ng-model="vm.client.cpf" ng-cpf ui-mask="999.999.999-99" required/>
+          <span style="color:red" ng-show="tableForm.cpf.$invalid && tableForm.$submitted">
+              <span ng-show="tableForm.cpf.$error.required">Required</span>
+              <span ng-show="!tableForm.cpf.$error.required">Invalid CPF</span>
+            </span>
+            <span style="color:red" ng-show="vm.duplicatedClient && tableForm.$submitted">Already exists</span>
+        </td>
+        <td>
+          <input type="email" class="form-control" name="email" ng-model="vm.client.email" required>
+          <span style="color:red" ng-show="tableForm.email.$invalid && tableForm.$submitted">
+              <span ng-show="tableForm.email.$error.required">Required</span>
+            </span>
+        </td>
+        <td>
+          <input class="form-control" name="address" ng-model="vm.client.address" required>
+          <span style="color:red" ng-show="tableForm.address.$invalid && tableForm.$submitted">
+              <span ng-show="tableForm.address.$error.required">Required</span>
+            </span>
+        </td>
+        <td>
+          <button class="btn btn-warning" ng-click="vm.openModal()">Add/Remove</button>
+          <span style="color:red" ng-show="vm.client.phones.length == 0 && tableForm.$submitted">
+            Required
+            </span>
+        </td>
+        <td>
+          <select class="form-control" name="maritalstatus" ng-model="vm.client.maritalstatus" required>
+            <option value="Married">Married</option>
+            <option value="Widowed">Widowed</option>
+            <option value="Separated">Separated</option>
+            <option value="Divorced">Divorced</option>
+            <option value="Single">Single</option>
+          </select>
+          <span style="color:red" ng-show="tableForm.maritalstatus.$invalid && tableForm.$submitted">
+              <span ng-show="tableForm.maritalstatus.$error.required">Required</span>
+            </span>
+        </td>
+        <td>
+          <button class="btn btn-primary" ng-click="vm.add(tableForm.$valid);">Create</button>
+        </td>
+        <td>
+          <button class="btn btn-nfo" ng-click="vm.update(tableForm.$valid);">Update</button>&nbsp;&nbsp;
+        </td>
+        <td>
+          <button class="btn btn-info" ng-click="vm.clear()">Clear</button>
+        </td>
+      </tr>
+      <tr ng-repeat="client in vm.clientList | filter:client.cpf">
+        <td>{{client.name}}</td>
+        <td>{{formatCpf(client.cpf)}}</td>
+        <td>{{client.email}}</td>
+        <td>{{client.address}}</td>
+        <td>
+          <div ng-repeat="phone in vm.client.phones">
+              {{phone.number}}
+          </div>
+        </td>
+        <td>{{client.maritalstatus}}</td>
+        <td>
+          <button class="btn btn-danger" ng-click="vm.remove(client._id)">Delete</button>
+        </td>
+        <td>
+          <button class="btn btn-warning" ng-click="vm.edit(client._id)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+</div>

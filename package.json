@@ -1,0 +1,23 @@
+{
+  "name": "minutradechallenge",
+  "version": "1.0.0",
+  "description": "Chalenge for the Full-Stack Developer role of Minutrade #MEANStack",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4"
+  },
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dpacosta/minutradechallenge.git"
+  },
+  "author": "Daniel Costa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dpacosta/minutradechallenge/issues"
+  },
+  "homepage": "https://github.com/dpacosta/minutradechallenge"
+}

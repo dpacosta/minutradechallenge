@@ -1,0 +1,21 @@
+{
+  "name": "minutradechallenge",
+  "description": "Chalenge for the Full-Stack Developer role of Minutrade #MEANStack",
+  "main": "index.js",
+  "authors": [
+    "Daniel Costa"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/dpacosta/minutradechallenge",
+  "dependencies": {
+    "angular": "1.4.0",
+    "angular-route": "1.4.0",
+    "angular-ui-utils": "0.1.1",
+    "ng-cpf-cnpj": "0.0.1",
+    "angular-bootstrap": "0.11.2",
+    "angular-dialog-service": "5.2.6"
+  },
+  "resolutions": {
+    "angular": "1.4.0"
+  }
+}

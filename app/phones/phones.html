@@ -1,0 +1,22 @@
+<form name="modalForm" ng-controller = "PhonesCtrl">
+        <div class="modal-header">
+            <h3 class="modal-title">Phones</h3>
+        </div>
+        <div class="modal-body">
+            <fieldset  data-ng-repeat="phone in client.phones">
+            <div class="col-xs-10">
+              <input name="phonenumber" class="form-control" type="text" ng-model="phone.number" placeholder="Enter a phone number" required>
+            </div >
+            <button class="btn btn-danger" ng-show="$last" ng-click="removePhone()">X</button>
+            </fieldset>
+            <button class="btn btn-info center-block" ng-click="addNewPhone()">+</button>
+        </div>
+        <span style="color:red" ng-show="modalForm.phonenumber.$invalid && modalForm.$submitted">
+            <span ng-show="modalForm.phonenumber.$error.required" >Empty numbers are not accepted</span>
+        </span>
+        <span style="color:red" ng-show="client.phones.length == 0 && modalForm.$submitted" >Add at least one contact number</span>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok(modalForm.$valid)">OK</button>
+            <button class="btn btn-danger" ng-click="cancel(modalForm.$valid)">Cancel</button>
+        </div>
+</form>
